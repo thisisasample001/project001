@@ -1,0 +1,1685 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>IQWD</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css" />
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="css/bootstrap-select.css">
+    <link rel="stylesheet" type="text/css" href="css/component.css" />
+ <!--   //<link rel="stylesheet" href="css/highcharts.css">-->
+    <link rel="stylesheet" href="css/iqwdcustom.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!--<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.js" ></script>-->
+    <script type="text/javascript" src="http://code.highcharts.com/stock/highstock.src.js" ></script>
+    <script type="text/javascript" src="http://code.highcharts.com/stock/modules/exporting.src.js" ></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.3/moment.min.js"></script> <!--momentjs-->
+
+    <script type="text/javascript">
+        jugalsLib = {
+            createSeries: function(options) {
+                data = [],
+                    {
+                        name: 'orvie test data',
+                        data: data
+                    };
+            }
+        };
+        jugalsLib.getBasicChartOptions = function(numberOfSeries,seriesOptions) {
+            var options = {
+                chart: {
+                    renderTo: 'container',
+                },
+                title: {
+                    text: ''
+                },
+                subtitle: {
+                    useHTML: true
+                },
+                xAxis: {
+                    type: 'datetime',
+                    tickPixelInterval: 150,
+                    gridLineWidth: 1,
+                    maxPadding: 0.5,
+                    navigator: true,
+                },
+                tooltip: {
+                    formatter: function () {
+                        return false;
+                    }
+                },
+                plotOptions: {
+                    line: {
+                        marker: {
+                            enabled: false,
+                            radius: 2,
+                        },
+                        states: {
+                            hover: {
+                                radiusPlus: 1,
+                                lineWidthPlus: 0
+                            },
+                        }
+                    },
+                    series: {
+                        lineWidth: 1.5,
+                        dataLabels: {
+                            align: 'center',
+                            enabled: false,
+                            allowOverlap: true
+                        },
+                        showInLegend: false,
+                        hover: {
+                            lineWidthPlus: 0,
+                            animation: { "duration": 1 }
+                        },
+                        states: {
+                            hover: {
+                                halo: {
+                                    size: 1,
+                                    attributes: {
+                                        fill: Highcharts.getOptions().colors[2],
+                                        'stroke-width': 7,
+                                        stroke: Highcharts.getOptions().colors[4]
+                                    }
+                                }
+                            }
+                        },
+                        enableMouseTracking: false
+                    },
+                }
+            };
+            numberOfSeries = numberOfSeries || jugalsLib.defaults.numberOfSeries;
+            if(numberOfSeries>0){
+                var i;
+                options.series=[];
+                for(i=0;i<numberOfSeries;i++)
+                    options.series.push(jugalsLib.createSeries(seriesOptions));
+            }
+            return options;
+        };
+    </script>
+    <script src="js/mod_highcharts.js"></script>
+</head>
+<body>
+<nav class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle">
+                <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#navbar-brand"></i>
+              </button>
+              <div class="navbar-brand"><img src="images/iqwd-logo.png" class="img-responsive"></div>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="navbar-brand">
+              <ul class="nav navbar-nav">
+              </ul>
+              <ul class="nav navbar-nav navbar-right">
+               <li class="dropdown"><a href="#" class="account-menu dropdown-toggle" data-toggle="dropdown"><cite class="account-text">$1,000.00</cite><sub class="id-account-text">PRACTICE ACCOUNT</sub> <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                      <div class="account-blok"><h5>choose account type</h5></div>
+                      <div class="col-md-6 col-xs-6 account-blok-left">
+                          <li class="real"><a href="#">Real Account</a></li>
+                          <li><h4>$0.00</h4></li>
+                          <li class="divider"></li>
+                          <li><h6>A real account allows you trade using real funds. Make a real deposit and withdraw real money.</h6></li>
+                      </div>
+                      <div class="col-md-6 col-xs-6 account-blok-right">
+                          <li class="practice"><a href="#">Practice Account</a></li>
+                          <li><h4><b>$1,000.00</b></h4></li>
+                          <li class="divider"></li>
+                          <li><h6>A Practice account allow you trade using virtual money and replenish your balance at any time up to 1,000 virtual dollars. You cannot withdraw funds from your practice account. Trading conditions and profitability on a practice account are identical to those on a real account.</h6></li>
+                      </div>
+                    </ul>
+                 </li>
+                <li class="dropdown"><a href="#" class="trader-menu dropdown-toggle" data-toggle="dropdown"><cite class="trader-avatar"><img src="images/trader_avatar.png"></cite><span class="caret"></span></a>
+                  <ul class="dropdown-menu" role="menu">
+                  <div class="trader-blok">
+                      <div class="col-md-6 col-xs-6 trader-blok-left">
+                          <li><h3>Name Surname</h3></li>
+                          <li><h5>name@email.com</h5></li>
+                          <li class="divider"></li>
+                          <li><h5><img src="images/uk.png"> United Kingdom</h5></li>
+                          <li><h6>Date registered</h6></li>
+                          <li><h5><strong>02 June 2017</strong></h5></li>
+                      </div>
+                      <div class="col-md-6 col-xs-6 trader-blok-right">
+                          <li><a href="#"><i class="fa fa-lg fa-pencil-square-o"></i> Personal data</a></li>
+                          <li><a href="#"><i class="fa fa-lg fa-plus-circle"></i> Deposit</a></li>
+                          <li><a href="#"><i class="fa fa-lg fa-usd"></i> Withdraw Funds</a></li>
+                          <li><a href="#"><i class="fa fa-lg fa-question-circle"></i> Contact Support</a></li>
+                          <li><a href="#"><i class="fa fa-lg fa-refresh"></i> Operation History</a></li>
+                          <li><a href="#"><i class="fa fa-lg fa-history"></i> Trading History</a></li>
+                          <li><a href="#"><i class="fa fa-lg fa-cog"></i> Settings</a></li>
+                          <li class="divider"></li>
+                          <li><a href="#"><i class="fa fa-lg fa-sign-out"></i> Logout</a></li>
+                      </div>
+                   </div>
+                  </ul>
+                </li>
+              </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+
+  <div class="nav-side-menu-left">
+    <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content-left"></i>
+
+        <div class="menu-list-left">
+
+            <ul id="menu-content-left" class="menu-content-left collapse out">
+            <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><cite class="btn-menu"><span class="menu-text">MENU</span></cite></a>
+                <ul class="dropdown-menu dropdown-home" role="menu">
+                   <div class="col-md-12 home-blok">
+                        <li><a href="#"><i class="fa fa-lg fa-info-circle"></i> About Us</a></li>
+                        <li><a href="#"><i class="fa fa-users"></i> For Traders</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#"><i class="fa fa-windows"></i> App for Windows</a></li>
+                        <li><h6>Slow website performance? Download our app</h6></li>
+                     </div>
+                </ul>
+            </li>
+            <li class="btn-open-position"><span class="open-position-text">OPEN POSITION</span></li>
+            <li class="btn-trading-history"><span class="trading-history-text">TRADING HISTORY</span></li>
+            <li class="btn-public-chat"><span class="public-chat-text">PUBLIC CHAT</span></li>
+            <li class="btn-leader-board"><span class="leader-board-text">LEADER BOARD</span></li>
+            <li class="btn-contest"><span class="contest-text">CONTEST</span></li>
+            <li class="btn-earning-calendar"><span class="earning-calendar-text">EARNING CALENDAR</span></li>
+            <li class="btn-market-news"><span class="market-news-text">MARKET NEWS</span></li>
+            <li class="btn-settings"><span class="settings-text">SETTINGS</span></li>
+            <li class="btn-full-screen"><span class="full-screen-text">FULL SCREEN</span></li>
+            <li class="btn-faq"><span class="faq-text">FAQ & HELP</span></li>
+            </ul>
+      </div>
+     </div>
+    <div class="nav-side-menu-right">
+
+    <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content-right"></i>
+        <div class="menu-list-right">
+            <ul id="menu-content-right" class="menu-content-right collapse out">
+             <li class="deposit-blok md-trigger" data-modal="modal-11"><a href="#"><cite class="deposit-menu"><img src="images/deposit.png">DEPOSIT</cite></a></li>
+        <div class="time-area">
+            <li class="time-title-menu">TIME</li>
+            <!--<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><cite class="input-time">18:20</cite></a>    -->
+          <!--<ul class="dropdown-menu dropdown-time blok-exp-time" role="menu">-->
+              <!--<div class="title-exp-time"><h5>Expiration Time</h5></div>-->
+                  <!--<div class="col-md-6 col-xs-6 time-blok-left time-blok">-->
+                      <!--<div class="profit">Profit <cite class="profit-box-left">79%</cite></div>-->
+                      <!--<div class="title-time-remaining-left">Time <cite class="span10">Remaining</cite></div>-->
+                          <!--<li>18:21 <span> 01:11</span></li>-->
+                          <!--<li>18:22 <span> 02:11</span></li>     -->
+                          <!--<li>18:23 <span> 03:11</span></li>-->
+                          <!--<li>18:24 <span> 04:11</span></li>-->
+                          <!--<li>18:25 <span> 05:11</span></li>-->
+                  <!--</div>-->
+                  <!--<div class="col-md-6 col-xs-6 time-blok-right time-blok">-->
+                      <!--<div class="profit">Profit <cite class="profit-box-right">70%</cite></div>-->
+                      <!--<div class="title-time-remaining-right">Time <cite class="span10">Remaining</cite></div>-->
+                          <!--<li>18:30 <span> 11:11</span></li>-->
+                          <!--<li>18:45 <span> 26:11</span></li>-->
+                          <!--<li>19:00 <span> 41:11</span></li>-->
+                          <!--<li>19:15 <span> 56:11</span></li>-->
+                          <!--<li>19:30 <span> 01:11</span></li>-->
+                          <!--<li>19:45 <span> 01:26</span></li>-->
+                          <!--<li>20:00 <span> 01:41</span></li>-->
+                          <!--<li>20:15 <span> 01:56</span></li>-->
+                          <!--<li>20:30 <span> 02:11</span></li>-->
+                          <!--<li>20:45 <span> 02:26</span></li>-->
+                          <!--<li>21:00 <span> 02:41</span></li>-->
+                          <!--<li>End of the Day</li>-->
+                          <!--<li>End of the Week</li>-->
+                  <!--</div>-->
+            <!--</ul>-->
+            <!--</li>-->
+          <div>
+            <div id='time' class='input-ftime' data-background-icon='&#xf017;'></div>
+          </div>
+            <li class="btn-time-holder"><button class="btn-time minus" onclick="deduct_minute()">-</button><button  class="btn-time plus" onclick="add_minute()">+</button></li>
+            </div>
+            <div class="amount-area">
+            <li class="amount-title-menu">AMOUNT</li>
+            <!--<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><cite class="input-amount">25</cite></a>-->
+          <!--<ul class="dropdown-menu dropdown-amount blok-amount" role="menu">-->
+                  <!--<div class="col-md-6 col-xs-6 amount-blok">-->
+                          <!--<li>10.00</li>-->
+                          <!--<li>1.00</li>-->
+                          <!--<li>25.00</li>-->
+                          <!--<li>5.00</li>-->
+                          <!--<li>2.00</li>-->
+                          <!--<li>50.00</li>-->
+                          <!--<li>100.00</li>-->
+                          <!--<div class="calculator"><i class="fa fa-2x fa-calculator" aria-hidden="true"></i></div>-->
+                  <!--</div>-->
+            <!--</ul></li>-->
+         <input id='bet' class="input-amount" style="background-color: transparent;width:100%" type='text' value="1"/>
+             <li class="btn-amount-holder"><button class="btn-amount minus" onclick="minus_button()">-</button><button  class="btn-amount plus"  onclick="add_button()">+</button></li>
+
+            </div>
+            <div class="profit-area">
+            <li class="profit-title-menu">PROFIT</li>
+            <li class="big-text-profit">79%</li>
+            <li class="below-text-profit">+$19.75</li>
+            </div>
+            <li class="btn-call" id="btngreen"><span class="call-text">CALL</span></li>
+            <li class="btn-put" id="btnred"><span class="put-text">PUT</span></li>
+            <button id='new_option' type="button" class="btn btn-warning" style="visibility: hidden;width: 120px; height: 100px;"><span style="font-size:20px;"><i class="fa fa-plus" style="font-size:35px;"></i><br>Option</span></button>
+            </ul>
+    </div>
+
+</div>
+
+<div class="container">
+    <!-- Deposit modal -->
+               <div class="md-modal md-effect-1" id="modal-1" >
+    <div class="md-content">
+  <div  class="col-sm-12 blok-new-set">
+        <div class="col-xs-4">
+          <ul class="nav nav-tabs">
+            <li class="active desc-tab"><a href="#turbo" data-toggle="tab"><strong>Turbo (7)</strong>
+            <p>Options with expiration time less than 5 minutes.</p></a>
+            </li>
+            <li class="desc-tab"> <a href="#binary" data-toggle="tab"><strong>Binary (8)</strong>
+            <p>Options with expiration time from 15 minutes.</p></a>
+            </li>
+            <li class="desc-tab-2"><a href="#classic" data-toggle="tab"><strong>Classic (0)</strong>
+            <p>Options with expiration unlimited profitability.</p></a>
+            </li>
+          </ul>
+          <div class="below-tab desc-tab tab-1">
+          <i class="fa fa-lg fa-info-circle"></i> The profit you will get if your prediction is correct is shown as a profit percentage. If the asset is not highlighted, it is unavailable at the moment.
+          </div>
+          <div class="below-tab desc-tab tab-2" style="display:none">
+          <a href="#"><img src="images/video.jpg" class="img-responsive"></a>
+          </div>
+        </div>
+
+        <div class="col-xs-8">
+          <div class="tab-content">
+            <div class="tab-pane active" id="turbo">
+            <div class="table-responsive">
+        <table class="table" style="table-layout: fixed; max-width: 400px; max-height: 350px;border-collapse: collapse; border-spacing: 0;">
+            <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search by name or ticker" style="font-size:12px; color:#222;">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button"><i class="fa fa-search"></i></button>
+                         </span>
+                    </div>
+            <tr>
+              <th style="width: 200px; padding: 0px 0px; border-width: 0px; padding-top:10px; padding-bottom:10px; font-size:12px; font-weight:normal; padding-left:15px;">Asset and profit</th>
+              <th style="width: 200px; padding: 0px 0px; border-width: 0px; padding-top:10px; padding-bottom:10px; font-size:12px; font-weight:normal; padding-left:15px;">5 min change</th>
+            </tr>
+
+            <tr>
+              <td>
+              <div class="span1"><img src="images/currency/audcad.png" ></div>
+                <div class="span2">AUD/CAD <br>88%</div>
+              </td>
+               <td>
+              <div class="span3"><img src="images/chart/chart_01.png"></div>
+              <div class="span4">
+            <i class="fa fa-lg fa-star fa-star-o stars" ></i>
+           </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+              <div class="span1"><img src="images/currency/audusd.png" ></div>
+                <div class="span2">AUD/USD <br>89%</div>
+              </td>
+              <td>
+              <div class="span3"><img src="images/chart/chart_02.png"></div>
+              <div class="span4">
+            <i class="fa fa-lg fa-star fa-star-o stars" ></i>
+           </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+              <div class="span1"><img src="images/currency/audjpy.png" ></div>
+                <div class="span2">AUD/JPY <br>81%</div>
+              </td>
+               <td>
+              <div class="span3"><img src="images/chart/chart_03.png"></div>
+              <div class="span4">
+            <i class="fa fa-lg fa-star fa-star-o stars" ></i>
+           </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+              <div class="span1"><img src="images/currency/cadchf.png" ></div>
+                <div class="span2">CAD/CHF <br>83%</div>
+              </td>
+              <td>
+              <div class="span3"><img src="images/chart/chart_04.png"></div>
+              <div class="span4">
+            <i class="fa fa-lg fa-star fa-star-o stars" ></i>
+           </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+              <div class="span1"><img src="images/currency/euraud.png" ></div>
+                <div class="span2">EUR/AUD <br>87%</div>
+              </td>
+               <td>
+              <div class="span3"><img src="images/chart/chart_05.png"></div>
+              <div class="span4">
+            <i class="fa fa-lg fa-star fa-star-o stars" ></i>
+           </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+              <div class="span1"><img src="images/currency/eurgbp.png" ></div>
+                <div class="span2">EUR/GBP <br>83%</div>
+              </td>
+              <td>
+              <div class="span3"><img src="images/chart/chart_06.png"></div>
+              <div class="span4">
+            <i class="fa fa-lg fa-star fa-star-o stars" ></i>
+           </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+              <div class="span1"><img src="images/currency/eurjpy.png" ></div>
+                <div class="span2">EUR/JPY <br>85%</div>
+              </td>
+               <td>
+              <div class="span3"><img src="images/chart/chart_07.png"></div>
+              <div class="span4">
+            <i class="fa fa-lg fa-star fa-star-o stars" ></i>
+           </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+              <div class="span1"><img src="images/currency/eurusd.png" ></div>
+                <div class="span2">EUR/USD <br>83%</div>
+              </td>
+              <td>
+              <div class="span3"><img src="images/chart/chart_08.png"></div>
+              <div class="span4">
+            <i class="fa fa-lg fa-star fa-star-o stars" ></i>
+           </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+              <div class="span1"><img src="images/currency/gbpchf.png" ></div>
+                <div class="span2">GBP/CHF <br>83%</div>
+              </td>
+               <td>
+              <div class="span3"><img src="images/chart/chart_09.png"></div>
+              <div class="span4">
+            <i class="fa fa-lg fa-star fa-star-o stars" ></i>
+           </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+              <div class="span1"><img src="images/currency/gbpjpy.png" ></div>
+                <div class="span2">GBP/JPY<br>80%</div>
+              </td>
+              <td>
+              <div class="span3"><img src="images/chart/chart_10.png"></div>
+              <div class="span4">
+            <i class="fa fa-lg fa-star fa-star-o stars" ></i>
+           </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+              <div class="span1"><img src="images/currency/nzdusd.png" ></div>
+                <div class="span2">NZD/USD <br>87%</div>
+              </td>
+               <td>
+              <div class="span3"><img src="images/chart/chart_04.png"></div>
+              <div class="span4">
+            <i class="fa fa-lg fa-star fa-star-o stars" ></i>
+           </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+              <div class="span1"><img src="images/currency/usdcad.png" ></div>
+                <div class="span2">USD/CAD <br>87%</div>
+              </td>
+              <td>
+              <div class="span3"><img src="images/chart/chart_08.png"></div>
+              <div class="span4">
+            <i class="fa fa-lg fa-star fa-star-o stars" ></i>
+           </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+              <div class="span1"><img src="images/currency/usdchf.png" ></div>
+                <div class="span2">USD/CHF <br>89%</div>
+              </td>
+               <td>
+              <div class="span3"><img src="images/chart/chart_06.png"></div>
+              <div class="span4">
+            <i class="fa fa-lg fa-star fa-star-o stars" ></i>
+           </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+              <div class="span1"><img src="images/currency/usdrub.png" ></div>
+                <div class="span2">USD/RUB <br>84%</div>
+              </td>
+              <td>
+              <div class="span3"><img src="images/chart/chart_03.png"></div>
+              <div class="span4">
+            <i class="fa fa-lg fa-star fa-star-o stars" ></i>
+           </div>
+              </td>
+            </tr>
+
+
+            </table>
+            </div>
+            <div class="span3">
+            <select id="soflow">
+              <option>All Assets</option>
+              <option>Commodities</option>
+              <option>Forex</option>
+              <option>Indices</option>
+              <option>Equities</option>
+            </select>
+          </div>
+          <div class="span4">
+            <select id="soflow">
+              <option>All Expirations</option>
+              <option>1 minute</option>
+              <option>15 minutes</option>
+              <option>1 hour</option>
+              <option>End of the day</option>
+              <option>End of the week</option>
+            </select>
+          </div>
+            </div>
+
+            <div class="tab-pane" id="binary">
+            <div class="table-responsive">
+        <table class="table" style="table-layout: fixed; max-width: 400px; max-height: 350px;border-collapse: collapse; border-spacing: 0;">
+            <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search by name or ticker" style="font-size:12px; color:#e222;">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button"><i class="fa fa-search"></i></button>
+                         </span>
+                    </div>
+            <tr>
+              <th style="width: 200px; padding: 0px 0px; border-width: 0px; padding-top:10px; padding-bottom:10px; font-size:12px; font-weight:normal; padding-left:15px;">Asset and profit</th>
+              <th style="width: 200px; padding: 0px 0px; border-width: 0px; padding-top:10px; padding-bottom:10px;font-size:12px; font-weight:normal; padding-left:15px;">5 min change</th>
+            </tr>
+
+            <tr>
+              <td>
+              <div class="span1"><img src="images/currency/audusd.png" ></div>
+                <div class="span2">AUD/USD <br>89%</div>
+              </td>
+              <td>
+              <div class="span3"><img src="images/chart/chart_02.png"></div>
+              <div class="span4">
+            <i class="fa fa-lg fa-star fa-star-o stars" ></i>
+           </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+              <div class="span1"><img src="images/currency/cadchf.png" ></div>
+                <div class="span2">CAD/CHF <br>83%</div>
+              </td>
+              <td>
+              <div class="span3"><img src="images/chart/chart_04.png"></div>
+              <div class="span4">
+            <i class="fa fa-lg fa-star fa-star-o stars" ></i>
+           </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+              <div class="span1"><img src="images/currency/audcad.png" ></div>
+                <div class="span2">AUD/CAD <br>88%</div>
+              </td>
+               <td>
+              <div class="span3"><img src="images/chart/chart_01.png"></div>
+              <div class="span4">
+            <i class="fa fa-lg fa-star fa-star-o stars" ></i>
+           </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+              <div class="span1"><img src="images/currency/euraud.png" ></div>
+                <div class="span2">EUR/AUD <br>87%</div>
+              </td>
+               <td>
+              <div class="span3"><img src="images/chart/chart_05.png"></div>
+              <div class="span4">
+            <i class="fa fa-lg fa-star fa-star-o stars" ></i>
+           </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+              <div class="span1"><img src="images/currency/audjpy.png" ></div>
+                <div class="span2">AUD/JPY <br>81%</div>
+              </td>
+               <td>
+              <div class="span3"><img src="images/chart/chart_03.png"></div>
+              <div class="span4">
+            <i class="fa fa-lg fa-star fa-star-o stars" ></i>
+           </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+              <div class="span1"><img src="images/currency/eurjpy.png" ></div>
+                <div class="span2">EUR/JPY <br>85%</div>
+              </td>
+               <td>
+              <div class="span3"><img src="images/chart/chart_07.png"></div>
+              <div class="span4">
+            <i class="fa fa-lg fa-star fa-star-o stars" ></i>
+           </div>
+              </td>
+            </tr>
+             <tr>
+              <td>
+              <div class="span1"><img src="images/currency/eurgbp.png" ></div>
+                <div class="span2">EUR/GBP <br>83%</div>
+              </td>
+              <td>
+              <div class="span3"><img src="images/chart/chart_06.png"></div>
+              <div class="span4">
+            <i class="fa fa-lg fa-star fa-star-o stars" ></i>
+           </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+              <div class="span1"><img src="images/currency/usdcad.png" ></div>
+                <div class="span2">USD/CAD <br>87%</div>
+              </td>
+              <td>
+              <div class="span3"><img src="images/chart/chart_08.png"></div>
+              <div class="span4">
+            <i class="fa fa-lg fa-star fa-star-o stars" ></i>
+           </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+              <div class="span1"><img src="images/currency/eurusd.png" ></div>
+                <div class="span2">EUR/USD <br>83%</div>
+              </td>
+              <td>
+              <div class="span3"><img src="images/chart/chart_08.png"></div>
+              <div class="span4">
+            <i class="fa fa-lg fa-star fa-star-o stars" ></i>
+           </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+              <div class="span1"><img src="images/currency/gbpchf.png" ></div>
+                <div class="span2">GBP/CHF <br>83%</div>
+              </td>
+               <td>
+              <div class="span3"><img src="images/chart/chart_09.png"></div>
+              <div class="span4">
+            <i class="fa fa-lg fa-star fa-star-o stars" ></i>
+           </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+              <div class="span1"><img src="images/currency/nzdusd.png" ></div>
+                <div class="span2">NZD/USD <br>87%</div>
+              </td>
+               <td>
+              <div class="span3"><img src="images/chart/chart_04.png"></div>
+              <div class="span4">
+            <i class="fa fa-lg fa-star fa-star-o stars" ></i>
+           </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+              <div class="span1"><img src="images/currency/usdchf.png" ></div>
+                <div class="span2">USD/CHF <br>89%</div>
+              </td>
+               <td>
+              <div class="span3"><img src="images/chart/chart_06.png"></div>
+              <div class="span4">
+            <i class="fa fa-lg fa-star fa-star-o stars" ></i>
+           </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+              <div class="span1"><img src="images/currency/usdrub.png" ></div>
+                <div class="span2">USD/RUB <br>84%</div>
+              </td>
+              <td>
+              <div class="span3"><img src="images/chart/chart_03.png"></div>
+              <div class="span4">
+            <i class="fa fa-lg fa-star fa-star-o stars" ></i>
+           </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+              <div class="span1"><img src="images/currency/gbpjpy.png" ></div>
+                <div class="span2">GBP/JPY<br>80%</div>
+              </td>
+              <td>
+              <div class="span3"><img src="images/chart/chart_10.png"></div>
+              <div class="span4">
+            <i class="fa fa-lg fa-star fa-star-o stars" ></i>
+           </div>
+              </td>
+            </tr>
+            </table>
+            </div>
+            <div class="span5">
+            <select id="soflow">
+              <option>All Assets</option>
+              <option>Commodities</option>
+              <option>Forex</option>
+              <option>Indices</option>
+              <option>Equities</option>
+            </select>
+          </div>
+          <div class="span6">
+            <select id="soflow">
+              <option>All Expirations</option>
+              <option>1 minute</option>
+              <option>15 minutes</option>
+              <option>1 hour</option>
+              <option>End of the day</option>
+              <option>End of the week</option>
+            </select>
+          </div>
+            </div>
+            <div class="tab-pane" id="classic">
+
+              <div class="with-nav-tabs">
+                <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search by name or ticker" style="font-size:12px; color:#222;">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button"><i class="fa fa-search"></i></button>
+                         </span>
+                    </div>
+
+                        <ul class="nav nav-tabs">
+                            <li class="active trending_opt classic_head"><a href="#trending" data-toggle="tab">TRENDING OPTIONS</a></li>
+                            <li class="assets_opt classic_head"><a href="#assets" data-toggle="tab">ALL ASSETS</a></li>
+                        </ul>
+
+
+                    <div class="tab-content">
+                        <div class="tab-pane fade in active" id="trending">
+
+                    <div class="table-responsive">
+            <table class="table" style="table-layout: fixed; max-width: 400px; max-height: 300px;border-collapse: collapse; border-spacing: 0;">
+            <tr>
+              <div class="open_word">opening Soon</div>
+            </tr>
+            <tr>
+              <th style="width: 200px; padding: 0px 0px; border-width: 0px; padding-top:10px; padding-bottom:10px; font-size:12px; font-weight:normal; padding-left:10px;">Option info</th>
+              <th style="width: 200px; padding: 0px 0px; border-width: 0px; padding-top:10px; padding-bottom:10px; font-size:12px; font-weight:normal; padding-left:10px;">Opt.price change - 2hr</th>
+            </tr>
+            <tr>
+              <td>lorem</td>
+              <td>ipsum</td>
+            </tr>
+            <tr>
+              <td>lorem</td>
+              <td>ipsum</td>
+            </tr>
+            <tr>
+              <td>lorem</td>
+              <td>ipsum</td>
+            </tr>
+            <tr>
+              <td>lorem</td>
+              <td>ipsum</td>
+            </tr>
+             <tr>
+              <td>lorem</td>
+              <td>ipsum</td>
+            </tr>
+            <tr>
+              <td>lorem</td>
+              <td>ipsum</td>
+            </tr>
+            <tr>
+              <td>lorem</td>
+              <td>ipsum</td>
+            </tr>
+            <tr>
+              <td>lorem</td>
+              <td>ipsum</td>
+            </tr>
+             <tr>
+              <td>lorem</td>
+              <td>ipsum</td>
+            </tr>
+            <tr>
+              <td>lorem</td>
+              <td>ipsum</td>
+            </tr>
+            <tr>
+              <td>lorem</td>
+              <td>ipsum</td>
+            </tr>
+            <tr>
+              <td>lorem</td>
+              <td>ipsum</td>
+            </tr>
+
+            </table>
+            </div>
+
+
+            </div>
+
+
+                        <div class="tab-pane fade" id="assets">
+
+                        <div class="table-responsive">
+            <table class="table" style="table-layout: fixed; max-width: 400px; max-height: 250px;border-collapse: collapse; border-spacing: 0;">
+            <tr>
+              <div class="open_word">opening Soon</div>
+            </tr>
+            <tr>
+              <th style="width: 200px; padding: 0px 0px; border-width: 0px; padding-top:10px; padding-bottom:10px;font-size:12px; font-weight:normal; padding-left:10px;">Asset</th>
+              <th style="width: 200px; padding: 0px 0px; border-width: 0px; padding-top:10px; padding-bottom:10px;font-size:12px; font-weight:normal; padding-left:10px;">2-hour change</th>
+            </tr>
+
+            <tr>
+              <td>lorem</td>
+              <td>ipsum</td>
+            </tr>
+            <tr>
+              <td>lorem</td>
+              <td>ipsum</td>
+            </tr>
+            <tr>
+              <td>lorem</td>
+              <td>ipsum</td>
+            </tr>
+            <tr>
+              <td>lorem</td>
+              <td>ipsum</td>
+            </tr>
+             <tr>
+              <td>lorem</td>
+              <td>ipsum</td>
+            </tr>
+            <tr>
+              <td>lorem</td>
+              <td>ipsum</td>
+            </tr>
+            <tr>
+              <td>lorem</td>
+              <td>ipsum</td>
+            </tr>
+            <tr>
+              <td>lorem</td>
+              <td>ipsum</td>
+            </tr>
+             <tr>
+              <td>lorem</td>
+              <td>ipsum</td>
+            </tr>
+            <tr>
+              <td>lorem</td>
+              <td>ipsum</td>
+            </tr>
+            <tr>
+              <td>lorem</td>
+              <td>ipsum</td>
+            </tr>
+            <tr>
+              <td>lorem</td>
+              <td>ipsum</td>
+            </tr>
+
+            </table>
+            </div>
+
+                        <select id="soflow2">
+              <option>All Assets</option>
+              <option>Consumer Discreationary</option>
+              <option>Utilities</option>
+              <option>Financials</option>
+              <option>Materials</option>
+              <option>Consumer Staples</option>
+              <option>Energy</option>
+              <option>Telecommunication Services</option>
+            </select>
+                        </div>
+
+                    </div>
+
+              </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+     </div>
+     <div class="md-close"></div>
+     </div>
+               <div class="md-modal md-effect-11" id="modal-11" >
+            <div class="md-content-2">
+            <div class="col-md-12 deposit-modal">
+            <div class="deposit-modal-title">Make a deposit</div>
+            <ul>
+                  <div class="col-md-6 deposit-md-text">
+                    <li class="deposit-md-subtitle">Practice Account</li>
+                    <li><h3><b class="bb">$1,000.00</b></h3></li>
+                    <li><h6><b class="bb">- No withdrawals</b></h6></li>
+                    <li><h6>- All assets available</h6></li>
+                    <li><h6>- Full-fledged platform</h6></li>
+                    <li><button class="deposit-btn-real">Fill Up To $1,000<span>Free replenishment</span></button></li>
+                  </div>
+                  <div class="col-md-6  deposit-md-text">
+                    <li class="deposit-md-subtitle">Real Account</li>
+                    <li><h3><b>$0</b></h3></li>
+                    <li><h6><b>- Easy withdrawals</b></h6></li>
+                    <li><h6>- All assets available</h6></li>
+                    <li><h6>- Full-fledged platform</h6></li>
+                    <li><button class="deposit-btn-practice">Fill Up Your Account<span>Minimun deposit $10</span></button></li>
+                  </div>
+
+               </ul>
+              <div class="deposit-md-bottom">You can toggle between your accounts at any moment</div>
+              <div class="md-close"></div>
+          </div>
+          </div>
+        </div>
+        <div class="md-overlay"></div>
+        <!-- Deposit modal /-->
+</div>
+
+<div class="container chart-wrapper">
+  <div id="container" style="height:600px; width: 99%; background:url('images/map2.jpg');background-size:contain;background-position: center center; "></div>
+
+old content
+<input type="checkbox" id="pause" value = 'NEW OPTION' style="display:none">
+<div id = 'order'>
+<div style='width:20%; float: left; padding: 15px; box-sizing: border-box;'>
+
+
+<form action = "<?php echo site_url('Welcome/insert'); ?>" method = 'POST' id = 'submit_trades'>
+Time: <span id='counter'>1:00</span> &nbsp Count: <input type=text id='count' name='count' maxlength='4' size='4'>
+ &nbsp <input type = text id = 'end_time' name = 'end_time'>  <br><br>
+
+AMOUNT: <input type = text id="bet" name = "bet" value = 0>
+
+</form>
+
+
+
+
+<br><br>
+<!--<input type="image" src="<?php echo base_url('assets/images/up.png'); ?>" id="btngreen" value="mark")"/>-->
+<!--<input type="image" src="<?php echo base_url('assets/images/down.png'); ?>"  id="btnred" value="mark" /><br>-->
+<input type = text id = 'coor_y'> <input type = text id = 'time'>
+</div>
+</div>
+
+
+</div>
+
+
+<footer class="navbar-default navbar-fixed-bottom">
+  <div class="container-fluid">
+    <div class="footer" id="footer">
+            <ul>
+              <li class="dropdown grid-layout footer-blok"><a href="#" class="blok-grid dropdown-toggle" data-toggle="dropdown"><cite class="grid-text"><i class="fa fa-lg fa-th-large" aria-hidden="true"></i></cite></a>
+                  <ul class="dropdown-menu dropdown-grid" role="menu">
+                    <div class="col-md-12 title-text-grid">CHART GRIDS</div>
+                     <div class="col-md-12 grid-blok">
+                        <div class="col-md-4 col-sm-4 grid-chart-desc">
+                            <li>1 chart</li>
+                <li>2 chart</li>
+                <li>3 chart</li>
+                <li>4 chart</li>
+                <li>More grids</li>
+              </div>
+              <div class="col-md-8 col-sm-8 grid-chart-img">
+                            <li><span ><img src="images/grid/grid-01.png" class="img-responsive"></span></li>
+                <li><span class="span11"><img src="images/grid/grid-02.png" class="img-responsive"></span><span><img src="images/grid/grid-03.png" class="img-responsive"></span></li>
+                <li><span class="span11"><img src="images/grid/grid-04.png" class="img-responsive"></span><span class="span11"><img src="images/grid/grid-05.png" class="img-responsive"></span><span class="span11"><img src="images/grid/grid-06.png" class="img-responsive"></span><span class="span11"><img src="images/grid/grid-07.png" class="img-responsive"></span><span><img src="images/grid/grid-08.png" class="img-responsive"></span></li>
+                <li><span class="span11"><img src="images/grid/grid-09.png" class="img-responsive"></span><span class="span11"><img src="images/grid/grid-10.png" class="img-responsive"></span><span class="span11"><img src="images/grid/grid-11.png" class="img-responsive"></span><span class="span11"><img src="images/grid/grid-12.png" class="img-responsive"></span><span><img src="images/grid/grid-13.png" class="img-responsive"></span></li>
+                <li><span class="span11"><img src="images/grid/grid-14.png" class="img-responsive"></span><span class="span11"><img src="images/grid/grid-15.png" class="img-responsive"></span><span class="span11"><img src="images/grid/grid-16.png" class="img-responsive"></span><span class="span11"><img src="images/grid/grid-17.png" class="img-responsive"></span><span><img src="images/grid/grid-18.png" class="img-responsive"></span></li>
+                <li><span class="span11"><img src="images/grid/grid-19.png" class="img-responsive"></span><span class="span11"><img src="images/grid/grid-20.png" class="img-responsive"></span><span class="span11"><img src="images/grid/grid-21.png" class="img-responsive"></span><span class="span11"><img src="images/grid/grid-22.png" class="img-responsive"></span><span><img src="images/grid/grid-23.png" class="img-responsive"></span></li>
+              </div>
+                      </div>
+                     <div class="col-md-12 col-sm-12 check-below-grid">
+              <form action="">
+                <input type="radio" name="grid" value="" class="span12"> <span class="text-below-grid"> Remember the number of charts (the first chart as the active)</span>
+              </form>
+            </div>
+
+                  </ul>
+                </li>
+                <li class="new-set-holder new-set md-trigger footer-blok" data-modal="modal-1"><a href="#"><cite class="new-set-text">+</cite></a></li>
+            </ul>
+
+    </div>
+    <!--/.footer-->
+
+    <div class="footer-bottom">
+        <div class="container-fluid">
+          <div class="pull-left">
+              <p> Support </p>
+          </div>
+          <div class="pull-right">
+              <p>14 June 2017 17:20:24 UTC+8</p>
+          </div>
+      </div>
+  </div>
+    <!--/.footer-bottom-->
+</footer>
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="js/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('.desc-tab').click(function(){
+                $('.tab-1').show();
+                $('.tab-2').hide();
+            });
+            $('.desc-tab-2').click(function(){
+                $('.tab-1').hide();
+                $('.tab-2').show();
+            });
+            $('.stars').click(function(){
+                $(this).toggleClass('fa-star-o');
+                $(this).toggleClass('starred');
+            });
+        });
+        $('.time-blok li').click(function(){
+            $('.input-time').text($(this).text());
+        });
+        $('.amount-blok li').click(function(){
+            $('.input-amount').text($(this).text());
+        });
+    </script>
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap-select.js"></script>
+    <script src="js/classie.js"></script>
+    <script src="js/modalEffects.js"></script>
+    <!--  <script src="js/highstock.js"></script> -->
+    <script type="text/javascript">
+        var yAxis; var vv;
+        var seconds = 60; //shorten for the mean time
+        var interval=1000;
+        var a=0;
+        var coor_x;
+        var coor_y;
+        var counter;
+        var count_bet = 0;
+        var y;
+//        alert(count_bet);
+
+        Highcharts.setOptions({
+            global: {
+                useUTC: false
+            }
+        });
+        var pause = $('#pause');
+        pause.after($('<button>').text('New Option').click(function() {
+            pause.click();
+        }).button());
+
+        var chartingOptions = {
+            chart: {
+                renderTo: 'container',
+                margin: [0, 10, 80, 0],
+                events: {
+                    load: function() {
+                        var series = this.series[0];
+                        var series2 = this.series[1];
+                        len = series.data.length;
+                        this.addSeries({
+                            id: 'end point',
+                            type: 'scatter',
+                            marker: {
+                                enabled:true,
+                                symbol:'circle',
+                                radius:3,
+                                fillColor:'',
+                                lineWidth:2,
+                                states: {
+                                    hover: {
+                                        enabled: 'true',
+                                    },
+                                },
+                            },
+                            data: [
+                                [
+                                    series.data[len - 1].x,
+                                    series.data[len - 1].y
+                                ]
+                            ],
+                            enableMouseTracking: false,
+                        });
+                        var series3 = this.get('end point');
+                        yAxis = this.yAxis[0];
+                        var xAxis = this.xAxis[0];
+                        setInterval(function() {
+                            var flag;
+                            if ($('#pause:checked').length > 0){
+                                flag = false;
+                            } else {
+                                flag = true;
+                            }
+                            var x = (new Date()).getTime();
+                                // current time
+                                y = Math.random() * 500;
+                            var ix = x + interval;
+                            var w = ix + 30000;
+                            console.log(flag);
+
+                            series.addPoint([x, y], flag, flag);
+
+                            if ($('#pause:checked').length <= 0){
+                                series3.data[0].setState('hover');
+                                series3.data[0].update([x, y]);
+                                series3.data[0].setState();
+                            }
+                            series2.addPoint([w, y], flag, flag);
+                            document.getElementById("coor_y").value = y.toFixed(4);
+                            yAxis.removePlotLine('avgLine');
+
+                            /* add horizontal gridline of marker */
+                            yAxis.addPlotLine({
+                                value: y,
+                                label: {
+                                    text: y.toFixed(2),
+                                    verticalAlign: 'middle',
+                                    enabled: false,
+                                    align: 'right',
+                                    rotation: 0,
+                                    useHTML: true,
+                                    style: {
+                                        "background-color": "#7CB5EC",
+                                        "color": "white",
+                                        "height":"25px",
+                                        "text-align":"center",
+                                        "padding-top":"5px",
+                                        "border-radius": "5px"
+                                    }
+                                },
+                                color: 'white',
+                                width: 1,
+                                dashStyle: 'Dash',
+                                id: 'avgLine'
+                            });
+                            xAxis.removePlotLine('ahLine');
+                            xAxis.removePlotLine('purchase_deadline');
+
+                            /* for testing */
+                            var test0 = ix;
+                            var test1 = moment(test0);
+                            var test2 = moment(test1).add(current_tick, 'seconds');
+                            var finaltest = moment(test2);
+                            var expiration = moment(finaltest).add(5, 'seconds');
+                            expiration = moment(expiration);
+                            /* end for testing */
+
+                            // plot/gridline for purchase deadline
+                            xAxis.addPlotLine({
+                                value: finaltest, //ix + 10000,
+                                color: 'white',
+                                width: 1,
+                                dashStyle: 'Dash',
+                                id: 'purchase_deadline',
+                                label: {
+                                    text: "<strong><li class='fa fa-hourglass-2'></li>"+counter+"</strong>", // "<strong>PURCHASE TIME: </strong><br/>"+"00:"+seconds,//Highcharts.dateFormat('%I:%M:%S %p', ix+6000) ,
+                                    verticalAlign: 'top',
+                                    align: 'right',
+                                    rotation: 0,
+                                    useHTML: true,
+                                    style: {
+//                                  "background": "rgb(124, 181, 236)",
+                                        "color": "black",
+                                        "text-align":"left",
+                                        "padding":"5px 5px 10px 5px",
+                                        "border-radius": "5px",
+                                        "font-size":"15px",
+//                                  "border-style":"dashed",
+//                                  "border-color":"#050000",
+//                                  "border-width":"2px"
+                                    }
+                                },
+                            });
+
+                            //plot for expiration line
+                            xAxis.addPlotLine({
+                                value: expiration,//ix + 15000,
+                                color: 'red',
+                                width: 2,
+                                dashStyle: 'Dash',
+                                id: 'ahLine'
+                            });
+
+                        }, interval);
+                    },
+                }
+            },
+            credits: {
+                enabled: false
+            },
+            rangeSelector: {
+                enabled: true,
+                buttonTheme: {
+                    width:200,
+                },
+                buttons: [{
+                    count: 1,
+                    type: 'minute',
+                    text: '2M'
+                }, {
+                    count: 4,
+                    type: 'minute',
+                    text: '4M'
+                }, {
+                    count: 1,
+                    type: 'days',
+                    text: '1D'
+                }, {
+                    type: 'all',
+                    text: 'All'
+                }],
+                inputEnabled: false,
+                selected: 0,
+                labelStyle: {
+                    visibility: 'hidden'
+                },
+                buttonPosition: {
+                    x: 270,
+                    y: 490
+                },
+            },
+            navigator:{
+                enabled: true,
+            },
+            exporting: {
+                enabled: false
+            },
+            series: [{
+                name: 'AAPZ',
+                type: 'area',
+                data: (function () {
+                // generate an array of random data
+                    var data = [],
+                        time = (new Date()).getTime(),
+                        i;
+
+                    for (i = -300; i <= 0; i += 1) {
+                        data.push([
+                            time + i * 1000,
+                            Math.random() * 1000
+                        ]);
+                    }
+                    return data;
+                }()),
+
+                fillColor: {
+                    linearGradient: {
+                        x1: 0,
+                        y1: 0,
+                        x2: 0,
+                        y2: 1
+                    },
+                    stops: [
+                        [0, Highcharts.getOptions().colors[0]],
+                        [1, Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
+                    ]
+                },
+                marker: {
+                    enabled: false,
+                    radius: 2,
+                },
+            },{
+                name: 'AAPL',
+                type: 'area',
+                enableMouseTracking: false,
+                data: (function () {
+                // generate an array of random data
+                    var data = [],
+                        time = (new Date()).getTime()+30000,
+                        i;
+                    for (i = -300; i <= 0; i += 1) {
+                        data.push([
+                            time + i * 1000,
+                            Math.random() * 1000
+                        ]);
+                    }
+                    return data;
+                }()),
+                gapSize: 5,
+                color: 'transparent',
+                marker: {
+                    enabled: false,
+                    radius: 2,
+                },
+            }]
+        };
+
+
+        chartingOptions = $.extend({}, jugalsLib.getBasicChartOptions(1, {
+            sampleCount: 300,
+            interval: interval
+        }), chartingOptions);
+        var chart = new Highcharts.Chart(chartingOptions);
+        var current_tick = 0;
+        var resetTimer;
+
+        function countdown(into_sec) {
+            if(into_sec > 0){
+                var seconds = 60 + into_sec;
+            } else if (into_sec == 'running_time'){
+                if (current_tick <= 0){
+                    var seconds = 60;
+                } else {
+                    var seconds = current_tick;
+                }
+            } else {
+                var seconds = 60;
+            }
+            clearInterval(resetTimer);
+
+            function tick() {
+                counter = document.getElementById("counter");
+                seconds--;
+                current_tick = seconds;
+                counter.innerHTML = "0:" + (seconds < 10 ? "0" : "") + String(seconds);
+                if( seconds > 0 ) {
+                    resetTimer = setTimeout(tick, 1000);
+                    clearInterval(counter);
+                    if( seconds < 15 && count_bet > 0){
+                        document.getElementById('btngreen').style.display = 'none';
+                        document.getElementById('btnred').style.display = 'none';
+                        document.getElementById('new_option').style.visibility = 'visible';
+                    } else if (seconds < 15 && (count_bet == null || count_bet == 0)){
+                        seconds = 60;
+                    }
+
+                } else {
+                    var count = document.getElementById("count").value;
+                    var i;
+
+                    for(i = 1; i <= count; i++){
+                        var amountid = "amount" + i;
+                        var rangeid = "range" + i;
+                        var end = "end" + i;
+
+                        var current = document.getElementById("coor_y").value;
+                        var amount = document.getElementById(amountid).value;
+                        var range =  document.getElementById(rangeid).value;
+                        var endid = "end" + i;
+
+                        document.getElementById(endid).value = document.getElementById("coor_y").value;
+                        //console.log(amount);
+                        //console.log(range) ;
+
+
+                        if (current > amount && range == 'up'){
+                            document.getElementById(amountid).style.color = "#66CD00";
+                        } else if (current > amount && range == 'down'){
+                            document.getElementById(amountid).style.color = "#FF0000";
+                        } else if (current < amount && range == 'up'){
+                            document.getElementById(amountid).style.color = "#FF0000";
+                        } else if (current < amount && range == 'down'){
+                            document.getElementById(amountid).style.color = "#66CD00";
+                        }
+                    }
+                }
+                if( seconds < 15 ){
+                    document.getElementById('btngreen').style.display = 'none';
+                    document.getElementById('btnred').style.display = 'none';
+                    document.getElementById('new_option').style.visibility = 'visible';
+                }
+            }
+            tick();
+        }
+
+        function insert_data() {
+            var data = $("#submit_trades").serialize();
+            // frm.submit(function (ev) {
+
+            $.ajax({
+                data: data,
+                type: "post",
+                url: "<?php echo site_url(); ?>/Welcome/insert",
+                success: function(data){
+                    console.log(data);
+                }
+            });
+            //     preventDefault();
+            // });
+        }
+
+        /* setup gradient background of PUT and Call */
+        var green_shade; var red_shade;
+        $("#btngreen").hover(function() {
+            green_shade = setInterval(function () {
+                green()
+            }, 50);
+        }, function(){
+            yAxis.removePlotBand('plot-band-1');
+            clearInterval(green_shade);
+        });
+
+        $("#btnred").hover(function() {
+            red_shade = setInterval(function () {
+                red()
+            }, 50);
+        }, function(){
+            yAxis.removePlotBand('plot-band-2');
+            clearInterval(red_shade);
+        });
+
+        // green gradient shade for call
+        function green(){
+            console.log("ON HOVER - CALL");
+            yAxis.removePlotBand('plot-band-1');
+            yAxis.addPlotBand({
+                from: 100000,
+                to: y,
+//             color: 'rgba(42, 167, 67, 0.09)',
+                color: {
+                    linearGradient: { x1: 1, y1: 1, x2: 1, y2: 0 },
+                    stops: [
+//                        [0, 'rgba(46, 230, 0, 0.22)'],
+                        [0, 'rgba(46, 230, 0, 0.22)'],
+                        [1, 'rgba(46, 230, 0, 0)'] //down
+                    ]
+                },
+                id: 'plot-band-1'
+            });
+        }
+
+        // red gradient shade for put
+        function red(){
+            console.log("ON HOVER - PUT");
+            yAxis.removePlotBand('plot-band-2');
+            yAxis.addPlotBand({
+                from: y,
+                to: 0,
+//             color: 'rgba(205, 35, 35, 0.09)',
+                color: {
+                    linearGradient: { x1: 1, y1: 1, x2: 1, y2: 0 },
+                    stops: [
+                        [0, 'rgba(255, 46, 46, 0)'], //down
+                        [1, 'rgba(255, 46, 46, 0.24)'] //up
+                    ]
+                },
+                id: 'plot-band-2'
+            });
+        }
+        /* ** END ** setup gradient background of PUT and Call */
+
+
+        $("#bet").keydown(function (e) {
+            // Allow: backspace, delete, tab, escape, enter and .
+            if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
+                (e.keyCode == 65 && (e.ctrlKey === true || e.metaKey === true)) ||
+                (e.keyCode == 67 && (e.ctrlKey === true || e.metaKey === true)) ||
+                (e.keyCode == 88 && (e.ctrlKey === true || e.metaKey === true)) ||
+                (e.keyCode >= 35 && e.keyCode <= 39)) {
+                return;
+            }
+            if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+                e.preventDefault();
+            }
+        });
+
+        /* Amount (right side menu) functionality */
+         function minus_button(){
+             new_val = $('#bet').val() - 1;
+             if(new_val <= 0){
+                 $('#bet').val(1);
+             }else {
+                 $('#bet').val(new_val);
+             }
+             var into_sec = change_minute * 60; // convert into seconds
+             countdown(into_sec);
+         }
+         function add_button(){
+             new_val = +$('#bet').val() + 1;
+             $('#bet').val(new_val);
+             var into_sec = change_minute * 60; // convert into seconds
+             countdown(into_sec);
+         }
+       /* END - amount button functionality */
+
+       /* Time (right side menu) functionality */
+         var change_minute = 0, now;
+
+         function startTime() {
+             now = moment(); //get current time
+             now = now.add(change_minute, 'minutes'); // update minute
+             document.getElementById("time").innerText = now.format("HH:mm"); //display updated time
+             t = setTimeout(function () {
+                 startTime()
+             }, 500); // run startTime() every 500ms
+         }
+         startTime(); //initial run of function
+
+         function add_minute(){
+             change_minute = change_minute + 1;
+             startTime();
+             var into_sec = change_minute * 60; // convert into seconds
+             countdown(into_sec);
+         }
+         function deduct_minute(){
+             if (change_minute <= 0){
+                 change_minute = 0;
+             } else {
+                 change_minute = change_minute -1;
+             }
+             startTime();
+             var into_sec = change_minute * 60; // convert into seconds
+             countdown(into_sec);
+         }
+      /* End - Time (right side menu) functionality */
+
+  <!--/script>-->
+  <!--<script type="text/javascript">-->
+
+        var x=1;
+        var count = 0;
+        $("#btngreen").click(function() {
+            var l = chart.series[0].points.length;
+            var p = chart.series[0].points[l - 1];
+
+            console.log(p);
+            count_bet = count_bet + 1;
+//            alert(count_bet);
+            // document.getElementById("amount"+ id++ +"").value = jugalsLib.nextValue(p.y).toFixed(4);
+            //document.getElementById("range").value = "up";
+            var bet = document.getElementById("bet").value
+            var d = document.getElementById('order');
+            var amount = document.getElementById("coor_y").value;
+            var range = 'up';
+
+            d.innerHTML += "Call&nbsp: <input type='text' maxlength='5' size='5' id='amount"+ x +"' value = "+amount+">&nbsp";
+            d.innerHTML += "End: <input type='text' maxlength='5' size='5' id='end"+ x +"' value = '--rolling--'>&nbsp";
+            d.innerHTML += "Range: <input type='text' id='range"+ x +"' value = "+range+" maxlength='4' size='4'><br>";
+            p.update({
+                marker: {
+                    symbol: 'Circle',
+                    fillColor: "#02CD0E",
+                    lineColor: "A0F0",
+                    radius: 2,
+                    enabled:true,
+                },
+                dataLabels: {
+                    align: 'right',
+                    enabled: true,
+                    allowOverlap: true,
+                    // shape: 'callout',
+                    borderRadius: 3,
+                    padding: 2,
+                    overflow: "justify",
+                    color: "white",
+                    backgroundColor: 'rgba(118, 238, 0, 0.3)',
+                    style: {"fontSize": "10px", textOutline: false   },
+                    formatter: function() {
+                        return "$" + bet;
+                    }
+                },
+            });
+            // add horizontal gridline
+            yAxis.addPlotLine({
+                value: vv,
+                color: 'rgb(41, 166, 67)',
+                width: 1,
+                dashStyle: 'Dash',
+                label: {
+                    text: vv.toFixed(2),
+                    verticalAlign: 'middle',
+                    align: 'right',
+                    rotation: 0,
+                    useHTML: true,
+                    style: {
+                        "background-color": "rgb(41, 166, 67)",
+                        "color": "white",
+                        "height":"25px",
+                        "text-align":"center",
+                        "padding-top":"5px",
+                        "border-radius": "5px"
+                    }
+                }
+            });
+
+            a = 1;
+
+            if (x <= 1 ){
+                countdown();
+            }
+            x++;
+            count++;
+            document.getElementById("count").value = count;
+            var data = {'tradeAmount':bet};
+            arrayPush(data);
+        });
+
+        $("#btnred").click(function() {
+            var x=1;
+            var count = 0;
+            count_bet = count_bet + 1;
+//            alert(count_bet);
+
+            var l = chart.series[0].points.length;
+            var p = chart.series[0].points[l - 1];
+
+            var bet = document.getElementById("bet").value
+            var d = document.getElementById('order');
+            var amount = document.getElementById("coor_y").value;
+            var range = 'down';
+
+            d.innerHTML += "Put&nbsp&nbsp: <input type='text' maxlength='5' size='5' id='amount"+ x +"' value = "+amount+">&nbsp";
+            d.innerHTML += "End: <input type='text' maxlength='5' size='5' id='end"+ x +"' value = '--rolling--'>&nbsp";
+            d.innerHTML += "Range: <input type='text' id='range"+ x +"' value = "+range+" maxlength='4' size='4'><br>";
+
+
+            p.update({
+                marker: {
+                    symbol: 'Circle',
+                    fillColor: "#FF0124",
+                    lineColor: "A0F0",
+                    radius: 2,
+                    enabled:true,
+                },
+                dataLabels: {
+                    align: 'right',
+                    enabled: true,
+                    // shape: 'callout',
+                    allowOverlap: true,
+                    borderRadius: 3,
+                    padding: 2,
+                    overflow: "justify",
+                    color: "white",
+                    backgroundColor: 'rgba(255, 0, 0, 0.3)',
+                    style: {"fontSize": "10px",textOutline: false   },
+                    formatter: function() {
+                        return "$" + bet;
+                    }
+
+                }
+
+            });
+            // add horizontal gridline
+            yAxis.addPlotLine({
+                value: vv,
+                color: '#CF2323',
+                width: 1,
+                dashStyle: 'Dash',
+                label: {
+                    text: vv.toFixed(2),
+                    verticalAlign: 'middle',
+                    align: 'right',
+                    rotation: 0,
+                    useHTML: true,
+                    style: {
+                        "background-color": "#CF2323",
+                        "color": "white",
+                        "height":"25px",
+                        "text-align":"center",
+                        "padding-top":"5px",
+                        "border-radius": "5px"
+                    }
+                }
+            });
+            a = 1;
+
+            if (x <= 1 ){
+                countdown('running_time');
+            }
+            x++;
+            count++;
+
+            document.getElementById("count").value = count;
+        });
+
+        //initial run of timer
+        $( document ).ready(function() {
+            if(count_bet == 0){
+                do {
+                    countdown('running_time');
+                } while(current_tick == 0);
+
+            }
+        });
+    </script>
+</body>
+</html>
